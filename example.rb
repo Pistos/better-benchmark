@@ -18,7 +18,7 @@ def report( result )
   )
 end
 
-NUM_INNER_ITERATIONS = 10000
+NUM_INNER_ITERATIONS = 500000
 
 # Provide two blocks of code to compare.  For example, two blocks that
 # accomplish the same thing, but differ in implementation.  For optimal
