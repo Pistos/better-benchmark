@@ -24,7 +24,8 @@ NUM_INNER_ITERATIONS = 500000
 # accomplish the same thing, but differ in implementation.  For optimal
 # results, the amount of time to execute a single iteration should be large
 # enough to adequately diminish the significance of any startup and stoppage
-# time of one iteration.
+# time of one iteration.  The number of benchmark iterations should not be
+# too large; better to increase the amount of work done per iteration.
 
 result = Benchmark.compare_realtime(
   :iterations => 20,
