@@ -1,0 +1,2 @@
+export R_HOME=/usr/lib/R
+ruby -Ilib example.rb
