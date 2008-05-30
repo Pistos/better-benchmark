@@ -2,22 +2,6 @@
 
 require 'better-benchmark'
 
-def report( result )
-  puts
-  puts( "Set 1 mean: %.3f s" % [ result[ :results1 ][ :mean ] ] )
-  puts( "Set 1 std dev: %.3f" % [ result[ :results1 ][ :stddev ] ] )
-  puts( "Set 2 mean: %.3f s" % [ result[ :results2 ][ :mean ] ] )
-  puts( "Set 2 std dev: %.3f" % [ result[ :results2 ][ :stddev ] ] )
-  puts "p.value: #{result[ :p ]}"
-  puts "W: #{result[ :W ]}"
-  puts(
-    "The difference (%+.1f%%) %s statistically significant." % [
-      ( ( result[ :results2 ][ :mean ] - result[ :results1 ][ :mean ] ) / result[ :results1 ][ :mean ] ) * 100,
-      result[ :significant ] ? 'IS' : 'IS NOT'
-    ]
-  )
-end
-
 NUM_INNER_ITERATIONS = 500000
 
 # Provide two blocks of code to compare.  For example, two blocks that
@@ -43,5 +27,5 @@ result = Benchmark.compare_realtime(
     x = ( 1 < 2 ? 'foo' : 'bar' )
   end  
 }
-report result
+Benchmark.report_on result
 

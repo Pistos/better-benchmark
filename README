@@ -10,11 +10,20 @@ result = Benchmark.compare_realtime {
 }.with {
   do_it_another_way
 }
-puts result[ :results1 ][ :mean ]
-puts result[ :results2 ][ :mean ]
-puts result[ :significant ]
+Benchmark.report_on result
 
 See also example.rb for a more comprehensive example.
+
+## Example Output
+
+....................
+Set 1 mean: 0.484 s
+Set 1 std dev: 0.098
+Set 2 mean: 0.469 s
+Set 2 std dev: 0.088
+p.value: 0.601661885634415
+W: 220.0
+The difference (-3.2%) IS NOT statistically significant.
 
 ## Help, etc.
 
