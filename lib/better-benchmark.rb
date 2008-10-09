@@ -18,8 +18,16 @@ module Benchmark
           $stdout.print "."; $stdout.flush
         end
         
-        times1 << Benchmark.realtime { @block1.call( iteration ) }
-        times2 << Benchmark.realtime { block2.call( iteration ) }
+        times1 << Benchmark.realtime do
+          @options[ :inner_iterations ].times do |i|
+            @block1.call( iteration )
+          end
+        end
+        times2 << Benchmark.realtime do
+          @options[ :inner_iterations ].times do |i|
+            block2.call( iteration )
+          end
+        end
       end
       
       r = RSRuby.instance
@@ -48,6 +56,7 @@ module Benchmark
   
   def self.compare_realtime( options = {}, &block1 )
     options[ :iterations ] ||= 20
+    options[ :inner_iterations ] ||= 1
     options[ :required_significance ] ||= 0.01
     
     ComparisonPartial.new( block1, options )

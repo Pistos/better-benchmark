@@ -2,8 +2,6 @@
 
 require 'better-benchmark'
 
-NUM_INNER_ITERATIONS = 500000
-
 # Provide two blocks of code to compare.  For example, two blocks that
 # accomplish the same thing, but differ in implementation.  For optimal
 # results, the amount of time to execute a single iteration should be large
@@ -13,19 +11,17 @@ NUM_INNER_ITERATIONS = 500000
 
 result = Benchmark.compare_realtime(
   :iterations => 20,
+  :inner_iterations => 500_000,
   :verbose => true
 ) { |iteration|
-  NUM_INNER_ITERATIONS.times do
-    if 1 < 2
-      x = 'foo'
-    else
-      x = 'bar'
-    end
+  if 1 < 2
+    x = 'foo'
+  else
+    x = 'bar'
   end
 }.with { |iteration|
-  NUM_INNER_ITERATIONS.times do
-    x = ( 1 < 2 ? 'foo' : 'bar' )
-  end  
+  x = ( 1 < 2 ? 'foo' : 'bar' )
 }
+
 Benchmark.report_on result
 
