@@ -59,6 +59,12 @@ module Benchmark
     options[ :inner_iterations ] ||= 1
     options[ :required_significance ] ||= 0.01
     
+    if options[ :iterations ] > 30
+      warn "You have set the number of iterations to #{options[ :iterations ]}. " +
+        "Using too many iterations may make the test results less reliable. " +
+        "Try increasing the number of :inner_iterations instead."
+    end
+    
     ComparisonPartial.new( block1, options )
   end
   
