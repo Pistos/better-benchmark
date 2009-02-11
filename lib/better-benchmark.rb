@@ -2,22 +2,24 @@ require 'benchmark'
 require 'rsruby'
 
 module Benchmark
-  
+
+  BETTER_BENCHMARK_VERSION = '0.7.0'
+
   class ComparisonPartial
     def initialize( block, options )
       @block1 = block
       @options = options
     end
-    
+
     def with( &block2 )
       times1 = []
       times2 = []
-      
+
       (1..@options[ :iterations ]).each do |iteration|
         if @options[ :verbose ]
           $stdout.print "."; $stdout.flush
         end
-        
+
         times1 << Benchmark.realtime do
           @options[ :inner_iterations ].times do |i|
             @block1.call( iteration )
@@ -29,10 +31,10 @@ module Benchmark
           end
         end
       end
-      
+
       r = RSRuby.instance
       wilcox_result = r.wilcox_test( times1, times2 )
-  
+
       {
         :results1 => {
           :times => times1,
@@ -53,7 +55,7 @@ module Benchmark
     end
     alias to with
   end
-  
+
   # Options:
   #   :iterations
   #     The number of times to execute the pair of blocks.
@@ -66,7 +68,7 @@ module Benchmark
   #
   # To use better-benchmark properly, it is important to set :iterations and
   # :inner_iterations properly.  There are a few things to bear in mind:
-  # 
+  #
   # (1) Do not set :iterations too high.  It should normally be in the range
   # of 10-20, but can be lower.  Over 25 should be considered too high.
   # (2) Execution time for one run of the blocks under test should not be too
@@ -84,16 +86,16 @@ module Benchmark
     options[ :iterations ] ||= 20
     options[ :inner_iterations ] ||= 1
     options[ :required_significance ] ||= 0.01
-    
+
     if options[ :iterations ] > 30
       warn "The number of iterations is set to #{options[ :iterations ]}.  " +
         "Using too many iterations may make the test results less reliable.  " +
         "It is recommended to increase the number of :inner_iterations instead."
     end
-    
+
     ComparisonPartial.new( block1, options )
   end
-  
+
   def self.report_on( result )
     puts
     puts( "Set 1 mean: %.3f s" % [ result[ :results1 ][ :mean ] ] )
