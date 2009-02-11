@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'rubygems'
 require 'better-benchmark'
 
 # Provide two blocks of code to compare.  For example, two blocks that
