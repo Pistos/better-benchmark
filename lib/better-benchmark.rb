@@ -4,6 +4,7 @@ require 'rsruby'
 module Benchmark
 
   BETTER_BENCHMARK_VERSION = '0.7.0'
+  DEFAULT_REQUIRED_SIGNIFICANCE = 0.01
 
   class ComparisonPartial
     def initialize( block, options )
@@ -32,28 +33,39 @@ module Benchmark
         end
       end
 
-      r = RSRuby.instance
-      wilcox_result = r.wilcox_test( times1, times2 )
-
-      {
-        :results1 => {
-          :times => times1,
-          :mean => r.mean( times1 ),
-          :stddev => r.sd( times1 ),
-        },
-        :results2 => {
-          :times => times2,
-          :mean => r.mean( times2 ),
-          :stddev => r.sd( times2 ),
-        },
-        :p => wilcox_result[ 'p.value' ],
-        :W => wilcox_result[ 'statistic' ][ 'W' ],
-        :significant => (
-          wilcox_result[ 'p.value' ] < @options[ :required_significance ]
-        ),
-      }
+      ::Benchmark.compare_times( times1, times2, @options[ :required_significance ] )
     end
     alias to with
+  end
+
+  # The number of elements in times1 and times2 should be the same.
+  # @param [Array] times1
+  #   An Array of elapsed times in float form, measured in seconds
+  # @param [Array] times2
+  #   An Array of elapsed times in float form, measured in seconds
+  # @param [Fixnum] required_significance
+  #   The maximum p value needed to declare statistical significance
+  def self.compare_times( times1, times2, required_significance = DEFAULT_REQUIRED_SIGNIFICANCE )
+    r = RSRuby.instance
+    wilcox_result = r.wilcox_test( times1, times2 )
+
+    {
+      :results1 => {
+        :times => times1,
+        :mean => r.mean( times1 ),
+        :stddev => r.sd( times1 ),
+      },
+      :results2 => {
+        :times => times2,
+        :mean => r.mean( times2 ),
+        :stddev => r.sd( times2 ),
+      },
+      :p => wilcox_result[ 'p.value' ],
+      :W => wilcox_result[ 'statistic' ][ 'W' ],
+      :significant => (
+        wilcox_result[ 'p.value' ] < ( required_significance || DEFAULT_REQUIRED_SIGNIFICANCE )
+      ),
+    }
   end
 
   # Options:
@@ -85,7 +97,6 @@ module Benchmark
   def self.compare_realtime( options = {}, &block1 )
     options[ :iterations ] ||= 20
     options[ :inner_iterations ] ||= 1
-    options[ :required_significance ] ||= 0.01
 
     if options[ :iterations ] > 30
       warn "The number of iterations is set to #{options[ :iterations ]}.  " +
