@@ -4,8 +4,8 @@ Statistically correct benchmarking for Ruby.
 
 ## Dependencies
 
-* The R Project: http://www.r-project.org/
-* rsruby: http://web.kuicr.kyoto-u.ac.jp/~alexg/rsruby/
+* [The R Project](http://www.r-project.org/)
+* [rsruby](http://github.com/alexgutteridge/rsruby)
 
 ## Usage
 
