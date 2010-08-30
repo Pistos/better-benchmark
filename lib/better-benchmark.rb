@@ -1,10 +1,18 @@
 require 'benchmark'
 require 'rsruby'
+require 'better-benchmark/bencher'
 
 module Benchmark
 
   BETTER_BENCHMARK_VERSION = '0.7.0'
   DEFAULT_REQUIRED_SIGNIFICANCE = 0.01
+
+  def self.write_realtime( data_dir, &block )
+    t = Benchmark.realtime( &block )
+    File.open( "#{data_dir}/#{Bencher::DATA_FILE}", 'w' ) do |f|
+      f.print t
+    end
+  end
 
   class ComparisonPartial
     def initialize( block, options )
