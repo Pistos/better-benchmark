@@ -4,19 +4,19 @@ Statistically correct benchmarking for Ruby.
 
 ## Dependencies
 
-The R Project: http://www.r-project.org/
-rsruby: http://web.kuicr.kyoto-u.ac.jp/~alexg/rsruby/
+* The R Project: http://www.r-project.org/
+* rsruby: http://web.kuicr.kyoto-u.ac.jp/~alexg/rsruby/
 
 ## Usage
 
 ### Comparing code blocks
 
-result = Benchmark.compare_realtime {
-  do_something_one_way
-}.with {
-  do_it_another_way
-}
-Benchmark.report_on result
+    result = Benchmark.compare_realtime {
+      do_something_one_way
+    }.with {
+      do_it_another_way
+    }
+    Benchmark.report_on result
 
 See also example.rb for a more comprehensive example.
 
