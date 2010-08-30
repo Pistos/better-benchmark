@@ -23,6 +23,7 @@ spec = Gem::Specification.new do |s|
         'run-example',
         'lib/better-benchmark.rb',
         'lib/better-benchmark/bencher.rb',
+        'lib/better-benchmark/comparison-partial.rb',
         'bin/bbench',
     ]
     s.extra_rdoc_files = [ 'README', 'LICENCE', ]
