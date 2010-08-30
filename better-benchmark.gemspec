@@ -17,7 +17,7 @@ spec = Gem::Specification.new do |s|
     s.email = 'betterbenchmark dot pistos at purepistos dot net'
 
     s.files = [
-        'README',
+        'README.md',
         'LICENCE',
         'example.rb',
         'run-example',
@@ -26,7 +26,7 @@ spec = Gem::Specification.new do |s|
         'lib/better-benchmark/comparison-partial.rb',
         'bin/bbench',
     ]
-    s.extra_rdoc_files = [ 'README', 'LICENCE', ]
+    s.extra_rdoc_files = [ 'README.md', 'LICENCE', ]
 end
 
 if $PROGRAM_NAME == __FILE__
