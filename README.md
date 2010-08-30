@@ -74,7 +74,7 @@ Considering two "things under test", U1 and U2:
     W: 88.0
     The difference (-13.5%) IS statistically significant.
 
-This means that the results permit us to conclude that the U2 performs 13.5%
+This means that the results permit us to conclude that U2 performed 13.5%
 faster than U1.
 
 ### Example 2
@@ -87,9 +87,8 @@ faster than U1.
     W: 67.0
     The difference (-17.6%) IS NOT statistically significant.
 
-This means that the results do not permit us to conclude anything; neither that
-U1 performs faster than U2, nor that U2 performs faster than U1, nor even that
-their performance is equivalent.
+This means that the results do not permit us to conclude that the performance
+of U1 and U2 differed.
 
 ## Help, etc.
 
