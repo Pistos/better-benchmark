@@ -48,7 +48,7 @@ To test two revisions of a library, create a simple runner script:
 
 Then run the bbench script, passing two git revisions:
 
-    bbench -r 6e84dd5 -r ed1e7c6 -d ~/tmp -- -Ilib test-quick.rb
+    bbench -r 6e84dd5 -r ed1e7c6 -d ~/tmp -- -Ilib runner.rb
 
 #### Without altering or writing new code
 
