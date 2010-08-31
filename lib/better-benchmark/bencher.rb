@@ -3,13 +3,14 @@ module Benchmark
     DATA_FILE = 'bbench-run-time'
 
     def print_usage
-      puts "#{$0} [-i <iterations>] [-w] [-r <revision 1> -r <revision 2>] [-p <max p-value>] [-d <data tmp dir>] -- <ruby args...>"
+      puts "#{$0} [-i <iterations>] [-w] [-r <revision 1> -r <revision 2>] [-p <max p-value>] [-d <data tmp dir>] [-e <executable/interpreter>] -- <executable's args...>"
     end
 
     # @param [Array] argv
     #   The command line arguments passed to the bencher script
     def initialize( argv )
       @iterations = 10
+      @executable = 'ruby'
 
       while argv.any?
         arg = argv.shift
@@ -24,6 +25,8 @@ module Benchmark
             $stderr.puts "#{@data_dir} is not a directory."
             exit 4
           end
+        when '-e'
+          @executable = argv.shift
         when '-i'
           @iterations = argv.shift.to_i
         when '-p'
@@ -37,19 +40,19 @@ module Benchmark
         when '-w'
           @test_working_copy = true
         when '--'
-          @ruby_args = argv.dup
+          @executable_args = argv.dup
           argv.clear
         end
       end
 
-      if ( ! @test_working_copy && ( @r1.nil? || @r2.nil? ) ) || @ruby_args.nil?
+      if ( ! @test_working_copy && ( @r1.nil? || @r2.nil? ) ) || @executable_args.nil?
         print_usage
         exit 2
       end
     end
 
     def one_run
-      system "ruby #{ @ruby_args.join(' ') }"  or exit $?
+      system "#{@executable} #{ @executable_args.join(' ') }"  or exit $?
     end
 
     def time_one_run

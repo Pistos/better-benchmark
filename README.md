@@ -99,6 +99,13 @@ faster than U1.
 This means that the results do not permit us to conclude that the performance
 of U1 and U2 differed.
 
+## Not just Ruby
+
+Technically, the bbench script can work with any script or program that writes
+a run time (in seconds) to the file bbench-run-time in the data dir.  Use the
+-e option to specify a different executable than "ruby".  e.g. perl, python,
+java, etc.
+
 ## Help, etc.
 
 irc.freenode.net#mathetes or http://webchat.freenode.net?channels=mathetes .
