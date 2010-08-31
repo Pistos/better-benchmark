@@ -66,10 +66,10 @@ module Benchmark
       times2 = []
 
       @iterations.times do
-        system "git co #{@r1}"  or exit $?
+        system "git checkout #{@r1}"  or exit $?
         times1 << time_one_run
 
-        system "git co #{@r2}"  or exit $?
+        system "git checkout #{@r2}"  or exit $?
         times2 << time_one_run
       end
 
