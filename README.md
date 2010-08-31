@@ -60,6 +60,15 @@ such as a file in your test suite:
 Be aware, however, that this may produce unnecessarily variant timings due to
 wide variance in the startup time of the Ruby interpreter and script.
 
+### Comparing git working copy
+
+You can also compare the current branch tip to the current (dirty) working copy:
+
+    bbench -w -d ~/tmp -- -Ilib runner.rb
+
+This lets you experiment without committing anything, and then only commit
+when you are confident that your changes result in a performance improvement.
+
 ## Interpretation
 
 Considering two "things under test", U1 and U2:

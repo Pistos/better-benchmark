@@ -3,7 +3,7 @@ module Benchmark
     DATA_FILE = 'bbench-run-time'
 
     def print_usage
-      puts "#{$0} [-i <iterations>] -r <revision 1> -r <revision 2> [-p <max p-value>] [-d <data tmp dir>] -- <ruby args...>"
+      puts "#{$0} [-i <iterations>] [-w] [-r <revision 1> -r <revision 2>] [-p <max p-value>] [-d <data tmp dir>] -- <ruby args...>"
     end
 
     # @param [Array] argv
@@ -34,13 +34,15 @@ module Benchmark
           else
             @r2 = argv.shift
           end
+        when '-w'
+          @test_working_copy = true
         when '--'
           @ruby_args = argv.dup
           argv.clear
         end
       end
 
-      if @r1.nil? || @r2.nil? || @ruby_args.nil?
+      if ( ! @test_working_copy && ( @r1.nil? || @r2.nil? ) ) || @ruby_args.nil?
         print_usage
         exit 2
       end
@@ -66,10 +68,18 @@ module Benchmark
       times2 = []
 
       @iterations.times do
-        system "git checkout #{@r1}"  or exit $?
+        if @test_working_copy
+          system "git stash -q"  or exit $?
+        else
+          system "git checkout #{@r1}"  or exit $?
+        end
         times1 << time_one_run
 
-        system "git checkout #{@r2}"  or exit $?
+        if @test_working_copy
+          system "git stash pop -q"  or exit $?
+        else
+          system "git checkout #{@r2}"  or exit $?
+        end
         times2 << time_one_run
       end
 
