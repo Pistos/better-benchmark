@@ -17,12 +17,13 @@ module Benchmark
         case arg
         when '-d'
           @data_dir = argv.shift
-          if ! Dir.exists?( @data_dir )
+          begin
+            if ! File.stat( @data_dir ).directory?
+              $stderr.puts "#{@data_dir} is not a directory."
+              exit 3
+            end
+          rescue Errno::ENOENT
             $stderr.puts "#{@data_dir} does not exist."
-            exit 3
-          end
-          if ! File.directory?( @data_dir )
-            $stderr.puts "#{@data_dir} is not a directory."
             exit 4
           end
         when '-e'
