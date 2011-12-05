@@ -53,7 +53,7 @@ module Benchmark
     end
 
     def one_run
-      system "#{@executable} #{ @executable_args.join(' ') }"  or exit $?
+      system "#{@executable} #{ @executable_args.join(' ') }"  or exit $?.to_i
     end
 
     def time_one_run
@@ -73,16 +73,16 @@ module Benchmark
 
       @iterations.times do
         if @test_working_copy
-          system "git stash -q"  or exit $?
+          system "git stash -q"  or exit $?.to_i
         else
-          system "git checkout #{@r1}"  or exit $?
+          system "git checkout #{@r1}"  or exit $?.to_i
         end
         times1 << time_one_run
 
         if @test_working_copy
-          system "git stash pop -q"  or exit $?
+          system "git stash pop -q"  or exit $?.to_i
         else
-          system "git checkout #{@r2}"  or exit $?
+          system "git checkout #{@r2}"  or exit $?.to_i
         end
         times2 << time_one_run
       end
