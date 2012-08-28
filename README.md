@@ -9,9 +9,13 @@ Statistically correct benchmarking for Ruby.
 
 ## Installation
 
+    # Linux:
     gem install better-benchmark -- --with-R-dir=/usr/lib/R
+    # OSX:
+    gem install better-benchmark -- --with-R-dir=/Library/Frameworks/R.framework/Resources
 
-Change `/usr/lib/R` to whatever is appropriate for your system.
+Change the argument of `--with-R-dir` to whatever is appropriate for your system
+if either of the above don't work.
 
 ## Usage
 
