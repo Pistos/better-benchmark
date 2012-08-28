@@ -7,6 +7,12 @@ Statistically correct benchmarking for Ruby.
 * [The R Project](http://www.r-project.org/)
 * [rsruby](http://github.com/alexgutteridge/rsruby)
 
+## Installation
+
+    gem install better-benchmark -- --with-R-dir=/usr/lib/R
+
+Change `/usr/lib/R` to whatever is appropriate for your system.
+
 ## Usage
 
 ### Comparing code blocks
