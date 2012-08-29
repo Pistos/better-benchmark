@@ -75,14 +75,14 @@ module Benchmark
         if @test_working_copy
           system "git stash -q"  or exit $?.to_i
         else
-          system "git checkout #{@r1}"  or exit $?.to_i
+          system "git checkout -q #{@r1}"  or exit $?.to_i
         end
         times1 << time_one_run
 
         if @test_working_copy
           system "git stash pop -q"  or exit $?.to_i
         else
-          system "git checkout #{@r2}"  or exit $?.to_i
+          system "git checkout -q #{@r2}"  or exit $?.to_i
         end
         times2 << time_one_run
       end
