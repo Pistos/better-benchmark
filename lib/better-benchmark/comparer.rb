@@ -3,7 +3,7 @@ require 'csv'
 module Benchmark
   class Comparer
     def print_usage
-      puts "bbench compare [-p <max p-value>] <timings1.csv> <timings2.csv>"
+      puts "bbench-compare [-p <max p-value>] <timings1.csv> <timings2.csv>"
     end
 
     # @param [Array] argv
@@ -51,7 +51,7 @@ module Benchmark
         improvement = ( results[:results2][:mean] - results[:results1][:mean] ) / results[:results1][:mean]
 
         run_results[thing_tested] = { improvement: improvement, significant: results[:significant] }
-        puts( "%s\t%+.1f%%\t%s" % [thing_tested, improvement * 100.0, results[:significant] ? '*' : '' ] )
+        puts( "%s\t%+.1f%%\t%s" % [thing_tested, improvement * 100.0, results[:significant] ? '' : '*' ] )
       end
 
       run_results

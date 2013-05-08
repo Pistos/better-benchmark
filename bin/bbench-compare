@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require 'better-benchmark'
+
+c = Benchmark::Comparer.new( ARGV.dup )
+results = c.run
+
+num_insignificant = results.reduce(0) { |n,key_and_result|
+  key, result = key_and_result
+  if ! result[:significant]
+    n += 1
+  end
+  n
+}
+
+if num_insignificant > 0
+  $stderr.puts "* #{num_insignificant} out of #{results.keys.count} results are statistically insignificant"
+end
