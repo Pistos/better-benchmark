@@ -3,6 +3,7 @@ require 'rsruby'
 
 require 'better-benchmark/comparison-partial'
 require 'better-benchmark/bencher'
+require 'better-benchmark/comparer'
 
 module Benchmark
 
