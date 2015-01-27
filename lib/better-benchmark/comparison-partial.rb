@@ -4,6 +4,16 @@ module Benchmark
     def initialize( block, options )
       @block1 = block
       @options = options
+
+      @options[:iterations] ||= 20
+      @options[:inner_iterations] ||= 1
+      @options[:warmup_iterations] ||= 0
+
+      if @options[:iterations] > 30
+        warn "The number of iterations is set to #{@options[:iterations]}.  " +
+        "Using too many iterations may make the test results less reliable.  " +
+        "It is recommended to increase the number of :inner_iterations instead."
+      end
     end
 
     def with( &block2 )
