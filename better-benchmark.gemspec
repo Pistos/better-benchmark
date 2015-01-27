@@ -4,10 +4,11 @@ Gem::Specification.new do |s|
   s.summary = 'Statistically correct benchmarking for Ruby.'
   s.description = 'Statistically correct benchmarking for Ruby.'
   s.homepage = 'http://github.com/Pistos/better-benchmark'
-  s.add_dependency 'rsruby'
+  s.add_runtime_dependency 'rsruby', '~> 0'
   s.requirements << 'The R project: http://www.r-project.org/'
   s.rubyforge_project = 'better-benchmark'
   s.executables = [ 'bbench', 'bbench-compare', ]
+  s.licenses = ['MIT',]
 
   s.authors = [ 'Pistos' ]
   s.email = 'betterbenchmark dot pistos at purepistos dot net'
