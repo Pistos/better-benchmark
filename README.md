@@ -17,6 +17,15 @@ Statistically correct benchmarking for Ruby.
 Change the argument of `--with-R-dir` to whatever is appropriate for your system
 if either of the above don't work.
 
+### With Bundler
+
+Bundler needs to be configured to use the build option:
+
+    # Linux:
+    bundle config build.rsruby --with-R-dir=/usr/lib/R
+    # OSX:
+    bundle config build.rsruby --with-R-dir=/Library/Frameworks/R.framework/Resources
+
 ## Usage
 
 ### Comparing code blocks
