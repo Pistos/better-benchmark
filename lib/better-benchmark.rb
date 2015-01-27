@@ -74,11 +74,11 @@ module Benchmark
   # by the blocks.  For code blocks that execute extremely rapidly, you may
   # need hundreds of thousands of :inner_iterations.
   def self.compare_realtime( options = {}, &block1 )
-    options[ :iterations ] ||= 20
-    options[ :inner_iterations ] ||= 1
+    options[:iterations] ||= 20
+    options[:inner_iterations] ||= 1
 
-    if options[ :iterations ] > 30
-      warn "The number of iterations is set to #{options[ :iterations ]}.  " +
+    if options[:iterations] > 30
+      warn "The number of iterations is set to #{options[:iterations]}.  " +
         "Using too many iterations may make the test results less reliable.  " +
         "It is recommended to increase the number of :inner_iterations instead."
     end
