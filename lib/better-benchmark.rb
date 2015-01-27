@@ -7,7 +7,7 @@ require 'better-benchmark/comparer'
 
 module Benchmark
 
-  BETTER_BENCHMARK_VERSION = '0.8.1'
+  BETTER_BENCHMARK_VERSION = '0.8.6'
   DEFAULT_REQUIRED_SIGNIFICANCE = 0.01
 
   def self.write_realtime( data_dir, &block )
