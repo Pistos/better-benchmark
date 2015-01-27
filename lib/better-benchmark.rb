@@ -47,15 +47,15 @@ module Benchmark
     }
   end
 
-  # Options:
-  #   :iterations
-  #     The number of times to execute the pair of blocks.
-  #   :inner_iterations
-  #     Used to increase the time taken per iteration.
-  #   :required_significance
-  #     Maximum allowed p value in order to declare the results statistically significant.
-  #   :verbose
-  #     Whether to print a dot for each iteration (as a sort of progress meter).
+  # @param options [Hash]
+  # @option options [Fixnum] :iterations
+  #   The number of times to execute the pair of blocks.
+  # @option options [Fixnum] :inner_iterations
+  #   Used to increase the time taken per iteration.
+  # @option options [Float] :required_significance
+  #   Maximum allowed p value in order to declare the results statistically significant.
+  # @option options [Boolean] :verbose
+  #   Whether to print a dot for each iteration (as a sort of progress meter).
   #
   # To use better-benchmark properly, it is important to set :iterations and
   # :inner_iterations properly.  There are a few things to bear in mind:
