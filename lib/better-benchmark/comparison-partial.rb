@@ -25,10 +25,17 @@ module Benchmark
           $stdout.print "."; $stdout.flush
         end
 
+        @options[:warmup_iterations].times do |i|
+          @block1.call( iteration )
+        end
         times1 << Benchmark.realtime do
           @options[:inner_iterations].times do |i|
             @block1.call( iteration )
           end
+        end
+
+        @options[:warmup_iterations].times do |i|
+          block2.call( iteration )
         end
         times2 << Benchmark.realtime do
           @options[:inner_iterations].times do |i|

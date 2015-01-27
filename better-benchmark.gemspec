@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'better-benchmark'
-  s.version = '0.8.6'
+  s.version = '0.8.7'
   s.summary = 'Statistically correct benchmarking for Ruby.'
   s.description = 'Statistically correct benchmarking for Ruby.'
   s.homepage = 'http://github.com/Pistos/better-benchmark'

@@ -7,7 +7,7 @@ require 'better-benchmark/comparer'
 
 module Benchmark
 
-  BETTER_BENCHMARK_VERSION = '0.8.6'
+  BETTER_BENCHMARK_VERSION = '0.8.7'
   DEFAULT_REQUIRED_SIGNIFICANCE = 0.01
 
   def self.write_realtime( data_dir, &block )
@@ -52,6 +52,9 @@ module Benchmark
   #   The number of times to execute the pair of blocks.
   # @option options [Fixnum] :inner_iterations
   #   Used to increase the time taken per iteration.
+  # @option options [Fixnum] :warmup_iterations
+  #   How many inner iterations to run beforehand, and not measure the time for.
+  #   This number does not reduce the number of :inner_iterations .
   # @option options [Float] :required_significance
   #   Maximum allowed p value in order to declare the results statistically significant.
   # @option options [Boolean] :verbose
@@ -66,7 +69,7 @@ module Benchmark
   # small (or else random variance will muddle the results).  Aim for at least
   # 1.0 seconds per iteration.
   # (3) Minimize the proportion of any warmup time (and cooldown time) of one
-  # block run.
+  # block run (or use :warmup_iterations to eliminate this factor entirely).
   #
   # In order to achieve these goals, you will need to tweak :inner_iterations
   # based on your situation.  The exact number you should use will depend on
